@@ -13,19 +13,21 @@ pipeline {
         stage('checkout') {
             steps {
                  script{
-                        dir("terraform")
-                        {
+                       // dir("terraform")
+                    //   {
                             git "https://github.com/ajinkyagadge/EC2INSTANCE.git"
-                        }
+                   //     }
                     }
                 }
             }
 
         stage('Plan') {
             steps {
-                sh 'pwd;cd terraform/ ; terraform init -upgrade'
-                sh "pwd;cd terraform/ ; terraform plan -out tfplan"
-                sh 'pwd;cd terraform/ ; terraform show -no-color tfplan > tfplan.txt'
+              //  sh 'pwd;cd terraform/ ; terraform init -upgrade'
+                sh 'terraform init -upgrade'
+                sh 'terraform plan'
+             //   sh "pwd;cd terraform/ ; terraform plan -out tfplan"
+              //  sh 'pwd;cd terraform/ ; terraform show -no-color tfplan > tfplan.txt'
             }
         }
         stage('Approval') {
